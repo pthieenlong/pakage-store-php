@@ -49,11 +49,14 @@ header {
     position: relative;
     margin-right: 1.2em;
 }
-.header .user .user-account:hover > .user-methods {
+/* .header .user .user-account:hover > .user-methods { */
     /* display: flex; */
-}
+/* } */
 .header .user .user-account span {
     margin-left: 5px;
+}
+.account-method {
+    cursor: pointer;
 }
 
 .header .user .user-cart {
@@ -1104,7 +1107,7 @@ footer {
     border-radius: 5px;
     border: 1px solid var(--darkblue-color);
 }
-#edit-btn {
+.user-info > .user-input-box > button {
     padding: 15px 55px;
     display: block;
     margin: auto;
@@ -1114,7 +1117,7 @@ footer {
     transition: color 200ms;
     transition: background-color 200ms;
 }
-#edit-btn:hover {
+.user-info > .user-input-box > button:hover {
     cursor: pointer;
     background-color: var(--lightblue-color);
     color: var(--black-color);

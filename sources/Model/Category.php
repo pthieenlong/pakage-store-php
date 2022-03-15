@@ -5,7 +5,7 @@ class Category {
     private $title;
 
     public function __construct($title) {
-        $this->id = getRandomID("cate");
+        // $this->id = getRandomID("cate");
         $this->title = $title;
     }
 
@@ -21,6 +21,4 @@ class Category {
 }   
 
 function getAllCate() {
-    
-    return [];
 }

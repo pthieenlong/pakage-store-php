@@ -147,7 +147,7 @@
                 <i class="fas fa-list"></i>
             </button> -->
             <section class="logo">
-                <a href="index.html">
+                <a href="./index.php">
                     <!-- <img src="src/img/logo.png" alt="" class="logo-img"> -->
                     <span class="logo-name">Pakage Store</span>
                 </a>
@@ -157,9 +157,8 @@
                     <?php 
                             if(isset($_SESSION['username']) && $_SESSION['success-login'] === 'success') {   
                                 $user = getUserByUsername($_SESSION['username']);
-                                echo "<script>console.log('{$user}');</script>";
                                 echo "
-                                    <a href='#' class='account-method'>
+                                    <a class='account-method'>
                                     <i class='fas fa-user'></i><span class='cart-inner-txt'>Xin chào {$_SESSION['username']}</span>
                                     </a>
                                     <ul class='user-methods'>
@@ -167,14 +166,14 @@
                                         <a class='btn'>Đơn hàng của tôi</a>
                                         </li>
                                         <li class='method'>
-                                        <a class='btn'>Tài khoản của tôi</a>
+                                        <a href='user.php?id={$user->getID()}' class='btn'>Tài khoản của tôi</a>
                                         </li>
                                         <li class='method'>
-                                        <a class='btn'>Thông báo</a>
+                                        <a class='btn'>Thông báo của tôi</a>
                                         </li>";
                                 if($user->getRoleID() == 0) 
                                     echo "<li class='method'>
-                                            <a class='btn'>Thông tin</a>
+                                            <a class='btn'>Thông tin website</a>
                                           </li>";
                                 echo "<li class='method'>
                                             <form method='POST'action='../Controller/LoginController.php'>

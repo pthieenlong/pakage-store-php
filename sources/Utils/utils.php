@@ -1,6 +1,7 @@
 <?php
 
 
-function getRandomID($model) {
-    return "";
+function setFormatPrice($price) {
+    
+    return '';
 }

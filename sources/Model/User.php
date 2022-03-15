@@ -10,13 +10,25 @@ class User {
     private $phone;
     private $password;
 
-    function __construct($username, $fullname, $email, $password) {
+    public function __construct($username, $fullname, $email, $password) {
         $this->username = $username;
         $this->fullname = $fullname;
         $this->email = $email;
         $this->password = $password;
     }
+    // public function __construct($id, $username, $fullname, $email, $password, $role_id)
+    // {
+    //     $this->id = $id;
+    //     $this->username = $username;
+    //     $this->fullname = $fullname;
+    //     $this->email = $email;
+    //     $this->password = $password;
+    //     $this->role_id = $role_id;
+    // }
 
+    function setID($id) {
+        $this->id = $id;
+    }
     function getID() {
         return $this->id;
     }
@@ -88,7 +100,29 @@ function getUserByUsername($username) {
         $user = $query->get_result();
         if($user->num_rows > 0) {
             $user = $user->fetch_assoc();
-            return new User($user['username'], $user['fullname'], $user['email'], $user['password']);
+            $result = new User($user['username'], $user['fullname'], $user['email'], $user['password']);
+            $result->setPhone($user['phone']);
+            $result->setRoleID($user['role_id']);
+            $result->setID($user['id']);
+            return $result;
+        } else return null;
+    } else return null;
+}
+
+function getUserByID($id) {
+    $db_connection = null;
+    $db_connection = ConnectDB($db_connection);
+    $query = $db_connection->prepare("SELECT * FROM User WHERE id = ?");
+    $query->bind_param("s", $id);
+    if($query->execute()) {
+        $user = $query->get_result();
+        if($user->num_rows > 0) {
+            $user = $user->fetch_assoc();
+            $result = new User($user['username'], $user['fullname'], $user['email'], $user['password']);
+            $result->setPhone($user['phone']);
+            $result->setRoleID($user['role_id']);
+            $result->setID($user['id']);
+            return $result;
         } else return null;
     } else return null;
 }

@@ -1,5 +1,7 @@
 <?php 
     include_once('./header.php');
+    include_once('../Model/Product.php');
+
 ?>
 <section class="container">
     <section class="content">
@@ -9,13 +11,7 @@
                     <li class="banner-nav_list-item"><a href="#"><i class="fas fa-list"></i>
                             CATE</a>
                         <ul class="cate-items">
-                            <?php 
-                                include '../Controller/CategoryController.php';
-        
-                                
-
-                            ?>
-                            <!-- <li class="cate-item">
+                            <li class="cate-item">
                                 <a href="#">Action</a>
                             </li>
                             <li class="cate-item">
@@ -50,7 +46,7 @@
                             </li>
                             <li class="cate-item">
                                 <a href="#">Indie</a>
-                            </li> -->
+                            </li>
                         </ul>
                     </li>
                     <li class="banner-nav_list-item"><a href="#"><i class="fab fa-hotjar"></i>
@@ -95,150 +91,31 @@
                 <span class="tag-more tag">MORE</span>
             </section>
             <section class="product-wrapper">
-                <div class="col-25">
-                    <article class="product">
-                        <a href="product.html">
-                            <img src="./img/product-img/banner-img.jpeg" alt="Product image" class="product-img">
-                            <div class="product-body">
-                                <p class="product-name">Product name</p>
-                                <p class="product-sale-price">$ 50 </p>
-                                <p class="product-price">$ 100 <span class="tag tag-sale">-50%</span></p>
+                <?php 
+                    $products = getAllProduct();
+                    foreach ($products as $product) {
+                        echo "
+                            <div class='col-25'>
+                                <article class='product'>
+                                    <a href='product.html'>
+                                        <img src='./img/product-img/banner-img.jpeg' alt='Product image' class='product-img'>
+                                        <div class='product-body'>
+                                            <p class='product-name'>{$product->getName()}</p>
+                                            <p class='product-sale-price'>$ {$product->getPrice()} </p>
+                                            <p class='product-price'>$ {$product->getPrice()} <span class='tag tag-sale'>-{$product->getSale()}%</span></p>
+                                        </div>
+                                    </a>
+                                    <div class='product-buy-opt'>
+                                        <button class='btn buy'>buy now
+                                            <i class='fas fa-cart-arrow-down'></i>
+                                        </button>
+                                        <button class='btn add-to-card'>add to cart <i class='fas fa-cart-plus'></i></button>
+                                    </div>
+                                </article>
                             </div>
-                        </a>
-                        <div class="product-buy-opt">
-                            <button class="btn buy">buy now
-                                <i class="fas fa-cart-arrow-down"></i>
-                            </button>
-                            <button class="btn add-to-card">add to cart <i class="fas fa-cart-plus"></i></button>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-25">
-                    <article class="product">
-                        <a href="product.html">
-                            <img src="./img/product-img/banner-img.jpeg" alt="Product image" class="product-img">
-                            <div class="product-body">
-                                <p class="product-name">Product name</p>
-                                <p class="product-sale-price">$ 50 </p>
-                                <p class="product-price">$ 100 <span class="tag tag-sale">-50%</span></p>
-                            </div>
-                        </a>
-                        <div class="product-buy-opt">
-                            <button class="btn buy">buy now
-                                <i class="fas fa-cart-arrow-down"></i>
-                            </button>
-                            <button class="btn add-to-card">add to cart <i class="fas fa-cart-plus"></i></button>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-25">
-                    <article class="product">
-                        <a href="product.html">
-                            <img src="./img/product-img/banner-img.jpeg" alt="Product image" class="product-img">
-                            <div class="product-body">
-                                <p class="product-name">Product name</p>
-                                <p class="product-sale-price">$ 50 </p>
-                                <p class="product-price">$ 100 <span class="tag tag-sale">-50%</span></p>
-                            </div>
-                        </a>
-                        <div class="product-buy-opt">
-                            <button class="btn buy">buy now
-                                <i class="fas fa-cart-arrow-down"></i>
-                            </button>
-                            <button class="btn add-to-card">add to cart <i class="fas fa-cart-plus"></i></button>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-25">
-                    <article class="product">
-                        <a href="product.html">
-                            <img src="./img/product-img/banner-img.jpeg" alt="Product image" class="product-img">
-                            <div class="product-body">
-                                <p class="product-name">Product name</p>
-                                <p class="product-sale-price">$ 50 </p>
-                                <p class="product-price">$ 100 <span class="tag tag-sale">-50%</span></p>
-                            </div>
-                        </a>
-                        <div class="product-buy-opt">
-                            <button class="btn buy">buy now
-                                <i class="fas fa-cart-arrow-down"></i>
-                            </button>
-                            <button class="btn add-to-card">add to cart <i class="fas fa-cart-plus"></i></button>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-25">
-                    <article class="product">
-                        <a href="product.html">
-                            <img src="./img/product-img/banner-img.jpeg" alt="Product image" class="product-img">
-                            <div class="product-body">
-                                <p class="product-name">Product name</p>
-                                <p class="product-sale-price">$ 50 </p>
-                                <p class="product-price">$ 100 <span class="tag tag-sale">-50%</span></p>
-                            </div>
-                        </a>
-                        <div class="product-buy-opt">
-                            <button class="btn buy">buy now
-                                <i class="fas fa-cart-arrow-down"></i>
-                            </button>
-                            <button class="btn add-to-card">add to cart <i class="fas fa-cart-plus"></i></button>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-25">
-                    <article class="product">
-                        <a href="product.html">
-                            <img src="./img/product-img/banner-img.jpeg" alt="Product image" class="product-img">
-                            <div class="product-body">
-                                <p class="product-name">Product name</p>
-                                <p class="product-sale-price">$ 50 </p>
-                                <p class="product-price">$ 100 <span class="tag tag-sale">-50%</span></p>
-                            </div>
-                        </a>
-                        <div class="product-buy-opt">
-                            <button class="btn buy">buy now
-                                <i class="fas fa-cart-arrow-down"></i>
-                            </button>
-                            <button class="btn add-to-card">add to cart <i class="fas fa-cart-plus"></i></button>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-25">
-                    <article class="product">
-                        <a href="product.html">
-                            <img src="./img/product-img/banner-img.jpeg" alt="Product image" class="product-img">
-                            <div class="product-body">
-                                <p class="product-name">Product name</p>
-                                <p class="product-sale-price">$ 50 </p>
-                                <p class="product-price">$ 100 <span class="tag tag-sale">-50%</span></p>
-                            </div>
-                        </a>
-                        <div class="product-buy-opt">
-                            <button class="btn buy">buy now
-                                <i class="fas fa-cart-arrow-down"></i>
-                            </button>
-                            <button class="btn add-to-card">add to cart <i class="fas fa-cart-plus"></i></button>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-25">
-                    <article class="product">
-                        <a href="product.html">
-                            <img src="./img/product-img/banner-img.jpeg" alt="Product image" class="product-img">
-                            <div class="product-body">
-                                <p class="product-name">Product name</p>
-                                <p class="product-sale-price">$ 50 </p>
-                                <p class="product-price">$ 100 <span class="tag tag-sale">-50%</span></p>
-                            </div>
-                        </a>
-                        <div class="product-buy-opt">
-                            <button class="btn buy">buy now
-                                <i class="fas fa-cart-arrow-down"></i>
-                            </button>
-                            <button class="btn add-to-card">add to cart <i class="fas fa-cart-plus"></i></button>
-                        </div>
-                    </article>
-                </div>
+                        ";
+                    }
+                ?>
             </section>
         </section>
         <hr>
