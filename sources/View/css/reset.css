@@ -1,0 +1,100 @@
+:root {
+    --black-color : #0B0C10;
+    --gray-color: #1F2833;
+    --lightgray-color: #C5C6C7;
+    --lightblue-color: #66FCF1;
+    --darkblue-color: #45A29E;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+    font-family: 'Roboto', sans-serif;
+}
+ul {
+    list-style-type: none;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+button {
+    border: none;
+}
+button:hover {
+    cursor: pointer;
+}
+table, th, td {
+    border: 1px solid var(--lightblue-color);
+    border-collapse: collapse;
+}
+hr {
+    /* float: right; */
+    width: 100%;
+    margin-bottom: 20px;
+    border-color: var(--lightblue-color);
+}
+.container {
+    padding: 3.125em 6.25em;
+    margin: 0 auto;
+}
+body {
+    /* background-color: var(--black-color); */
+    background-image: url(../img/background.png);
+}
+.content {
+    margin-bottom: 20px;
+}
+.tag {
+    border: 1px solid var(--lightblue-color);
+    color: var(--lightgray-color);
+    padding: 5px;
+    margin: 0 5px;
+}
+.fa-star {
+    color: var(--gray-color);
+}
+.checked {
+    color: var(--darkblue-color);
+}
+.text-left {
+    text-align: left;
+}
+.fa-star:hover {
+    color: var(--darkblue-color);
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+.wrapper {
+    margin: 2em 0px;
+    padding: initial 6.25em;
+    padding-left: 6.25em;
+    padding-right: 6.25em;
+}
+/* wrapper */
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+    .wrapper {
+        margin: 2em 0px;
+        padding: 0 2.5em;
+    }
+    .container {
+        padding: 0;
+    }
+}
+/* mobile */
+@media only screen and (max-width: 46.1875em) {
+    .wrapper {
+        margin: 25px 0px;
+        padding: 0 .5em;
+    }
+    .container {
+        padding: 0;
+    }   
+}

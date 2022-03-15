@@ -1,7 +1,6 @@
 <?php
 include_once '../Utils/database.php';
 
-// Add them create date vao nhe :D
 class User {
     private $id;
     private $role_id;
@@ -11,13 +10,10 @@ class User {
     private $phone;
     private $password;
 
-    function __construct($username, $fullname, $email, $phone, $password) {
-        $this->id = getRandomIDForUser();
-        $this->role_id = 1;
+    function __construct($username, $fullname, $email, $password) {
         $this->username = $username;
         $this->fullname = $fullname;
         $this->email = $email;
-        $this->phone = $phone;
         $this->password = $password;
     }
 
@@ -59,14 +55,48 @@ class User {
     }
 
     function __toString() {
-        return $this->username.', '.$this->fullname.', '.$this->phone.', '.$this->email.', '.$this->password.'<br/>';
+        return $this->getUsername().', '.$this->getFullName().', '.$this->getPhone().', '.$this->getEmail().', '.$this->getPassword().', '.$this->getRoleID();
     }
 
-    function getAllUser() {
-        $db_connection = null;
-        $db_connection = ConnectDB($db_connection);
-        $query = "SELECT * FROM User";
-        $users = $db_connection->query($query)->fetch_assoc();
-        return $users;
-    }
+}
+
+function getAllUser() {
+    $db_connection = null;
+    $db_connection = ConnectDB($db_connection);
+    $query = "SELECT * FROM User";
+    $users = $db_connection->query($query)->fetch_assoc();
+    return $users;
+}
+
+function addUser($user) {
+    $db_connection = null;
+    $db_connection = ConnectDB($db_connection);
+
+    $query = $db_connection->prepare("INSERT INTO User VALUES (null, ?, ?, ?, ?, '', 1)");
+
+    $query->bind_param("ssss", $user->getUsername(), $user->getPassword(), $user->getEmail(), $user->getFullName());
+
+    $query->execute();
+}
+
+function getUserByUsername($username) {
+    $db_connection = null;
+    $db_connection = ConnectDB($db_connection);
+    $query = $db_connection->prepare("SELECT * FROM User WHERE username = ?");
+    $query->bind_param("s", $username);
+    if($query->execute()) {
+        $user = $query->get_result();
+        if($user->num_rows > 0) {
+            $user = $user->fetch_assoc();
+            return new User($user['username'], $user['fullname'], $user['email'], $user['password']);
+        } else return null;
+    } else return null;
+}
+
+function isPasswordCorrected($username, $password) {
+    $user = getUserByUsername($username);
+
+    if($user->getPassword() === $password) {
+        return true;
+    } else return false;
 }
