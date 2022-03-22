@@ -2,6 +2,7 @@
 session_start();
 include_once '../Model/User.php';
 unset($_SESSION['success-login']);
+
 function login() {
     $username = isset($_POST['login-username']) ? $_POST['login-username'] : 'error';
     $password = isset($_POST['login-password']) ? $_POST['login-password'] : 'error';

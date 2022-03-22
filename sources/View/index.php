@@ -1,7 +1,6 @@
-<?php 
-    include_once('./header.php');
-    include_once('../Model/Product.php');
-
+<?php
+include_once('./header.php');
+include_once('../Model/Product.php');
 ?>
 <section class="container">
     <section class="content">
@@ -91,18 +90,19 @@
                 <span class="tag-more tag">MORE</span>
             </section>
             <section class="product-wrapper">
-                <?php 
-                    $products = getAllProduct();
-                    foreach ($products as $product) {
-                        echo "
+                <?php
+                $products = getNumbersOfProductOnSale(8);
+
+                foreach ($products as $product) {
+                    echo "
                             <div class='col-25'>
                                 <article class='product'>
-                                    <a href='product.html'>
+                                    <a href='product.php?id={$product->getID()}'>
                                         <img src='./img/product-img/banner-img.jpeg' alt='Product image' class='product-img'>
                                         <div class='product-body'>
                                             <p class='product-name'>{$product->getName()}</p>
-                                            <p class='product-sale-price'>$ {$product->getPrice()} </p>
-                                            <p class='product-price'>$ {$product->getPrice()} <span class='tag tag-sale'>-{$product->getSale()}%</span></p>
+                                            <p class='product-sale-price'>" . ($product->getSale() == 0 ? $product->getPrice() : $product->getTotalPrice()) . " VNĐ" . "</p>
+                                            <p class='product-price'>" . ($product->getSale() == 0 ? '' : $product->getPrice() . " VNĐ") . "<span class='tag tag-sale'>-" . ($product->getSale() * 100) . "%</span></p>
                                         </div>
                                     </a>
                                     <div class='product-buy-opt'>
@@ -114,7 +114,7 @@
                                 </article>
                             </div>
                         ";
-                    }
+                }
                 ?>
             </section>
         </section>
@@ -125,154 +125,36 @@
                 <span class="tag-more tag">MORE</span>
             </section>
             <section class="product-wrapper">
-                <div class="col-25">
-                    <article class="product">
-                        <a href="product.html">
-                            <img src="./img/product-img/banner-img.jpeg" alt="Product image" class="product-img">
-                            <div class="product-body">
-                                <p class="product-name">Product name</p>
-                                <p class="product-sale-price">$ 50 </p>
-                                <p class="product-price">$ 100 <span class="tag tag-sale">-50%</span></p>
+                <?php
+                $products = getNumbersOfProduct(8);
+
+                foreach ($products as $product) {
+                    echo "
+                            <div class='col-25'>
+                                <article class='product'>
+                                    <a href='product.php?id={$product->getID()}'>
+                                        <img src='./img/product-img/banner-img.jpeg' alt='Product image' class='product-img'>
+                                        <div class='product-body'>
+                                            <p class='product-name'>{$product->getName()}</p>
+                                            <p class='product-sale-price'>" . ($product->getSale() == 0 ? $product->getPrice() : $product->getTotalPrice()) . " VNĐ" . "</p>
+                                            <p class='product-price'>" . ($product->getSale() == 0 ? '' : $product->getPrice() . " VNĐ") . "<span class='tag tag-sale'>-" . ($product->getSale() * 100) . "%</span></p>
+                                        </div>
+                                    </a>
+                                    <div class='product-buy-opt'>
+                                        <button class='btn buy'>buy now
+                                            <i class='fas fa-cart-arrow-down'></i>
+                                        </button>
+                                        <button class='btn add-to-card'>add to cart <i class='fas fa-cart-plus'></i></button>
+                                    </div>
+                                </article>
                             </div>
-                        </a>
-                        <div class="product-buy-opt">
-                            <button class="btn buy">buy now
-                                <i class="fas fa-cart-arrow-down"></i>
-                            </button>
-                            <button class="btn add-to-card">add to cart <i class="fas fa-cart-plus"></i></button>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-25">
-                    <article class="product">
-                        <a href="product.html">
-                            <img src="./img/product-img/banner-img.jpeg" alt="Product image" class="product-img">
-                            <div class="product-body">
-                                <p class="product-name">Product name</p>
-                                <p class="product-sale-price">$ 50 </p>
-                                <p class="product-price">$ 100 <span class="tag tag-sale">-50%</span></p>
-                            </div>
-                        </a>
-                        <div class="product-buy-opt">
-                            <button class="btn buy">buy now
-                                <i class="fas fa-cart-arrow-down"></i>
-                            </button>
-                            <button class="btn add-to-card">add to cart <i class="fas fa-cart-plus"></i></button>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-25">
-                    <article class="product">
-                        <a href="product.html">
-                            <img src="./img/product-img/banner-img.jpeg" alt="Product image" class="product-img">
-                            <div class="product-body">
-                                <p class="product-name">Product name</p>
-                                <p class="product-sale-price">$ 50 </p>
-                                <p class="product-price">$ 100 <span class="tag tag-sale">-50%</span></p>
-                            </div>
-                        </a>
-                        <div class="product-buy-opt">
-                            <button class="btn buy">buy now
-                                <i class="fas fa-cart-arrow-down"></i>
-                            </button>
-                            <button class="btn add-to-card">add to cart <i class="fas fa-cart-plus"></i></button>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-25">
-                    <article class="product">
-                        <a href="product.html">
-                            <img src="./img/product-img/banner-img.jpeg" alt="Product image" class="product-img">
-                            <div class="product-body">
-                                <p class="product-name">Product name</p>
-                                <p class="product-sale-price">$ 50 </p>
-                                <p class="product-price">$ 100 <span class="tag tag-sale">-50%</span></p>
-                            </div>
-                        </a>
-                        <div class="product-buy-opt">
-                            <button class="btn buy">buy now
-                                <i class="fas fa-cart-arrow-down"></i>
-                            </button>
-                            <button class="btn add-to-card">add to cart <i class="fas fa-cart-plus"></i></button>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-25">
-                    <article class="product">
-                        <a href="product.html">
-                            <img src="./img/product-img/banner-img.jpeg" alt="Product image" class="product-img">
-                            <div class="product-body">
-                                <p class="product-name">Product name</p>
-                                <p class="product-sale-price">$ 50 </p>
-                                <p class="product-price">$ 100 <span class="tag tag-sale">-50%</span></p>
-                            </div>
-                        </a>
-                        <div class="product-buy-opt">
-                            <button class="btn buy">buy now
-                                <i class="fas fa-cart-arrow-down"></i>
-                            </button>
-                            <button class="btn add-to-card">add to cart <i class="fas fa-cart-plus"></i></button>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-25">
-                    <article class="product">
-                        <a href="product.html">
-                            <img src="./img/product-img/banner-img.jpeg" alt="Product image" class="product-img">
-                            <div class="product-body">
-                                <p class="product-name">Product name</p>
-                                <p class="product-sale-price">$ 50 </p>
-                                <p class="product-price">$ 100 <span class="tag tag-sale">-50%</span></p>
-                            </div>
-                        </a>
-                        <div class="product-buy-opt">
-                            <button class="btn buy">buy now
-                                <i class="fas fa-cart-arrow-down"></i>
-                            </button>
-                            <button class="btn add-to-card">add to cart <i class="fas fa-cart-plus"></i></button>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-25">
-                    <article class="product">
-                        <a href="product.html">
-                            <img src="./img/product-img/banner-img.jpeg" alt="Product image" class="product-img">
-                            <div class="product-body">
-                                <p class="product-name">Product name</p>
-                                <p class="product-sale-price">$ 50 </p>
-                                <p class="product-price">$ 100 <span class="tag tag-sale">-50%</span></p>
-                            </div>
-                        </a>
-                        <div class="product-buy-opt">
-                            <button class="btn buy">buy now
-                                <i class="fas fa-cart-arrow-down"></i>
-                            </button>
-                            <button class="btn add-to-card">add to cart <i class="fas fa-cart-plus"></i></button>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-25">
-                    <article class="product">
-                        <a href="product.html">
-                            <img src="./img/product-img/banner-img.jpeg" alt="Product image" class="product-img">
-                            <div class="product-body">
-                                <p class="product-name">Product name</p>
-                                <p class="product-sale-price">$ 50 </p>
-                                <p class="product-price">$ 100 <span class="tag tag-sale">-50%</span></p>
-                            </div>
-                        </a>
-                        <div class="product-buy-opt">
-                            <button class="btn buy">buy now
-                                <i class="fas fa-cart-arrow-down"></i>
-                            </button>
-                            <button class="btn add-to-card">add to cart <i class="fas fa-cart-plus"></i></button>
-                        </div>
-                    </article>
-                </div>
+                        ";
+                }
+                ?>
             </section>
         </section>
     </section>
 </section>
-<?php 
-    include_once ('./footer.php');
+<?php
+include_once('./footer.php');
 ?>

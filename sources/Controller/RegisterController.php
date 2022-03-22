@@ -3,15 +3,17 @@ require_once '../Model/User.php';
 // require_once './UserController.php';
 
 
+
 function register() {
     $username = isset($_POST['username']) ? $_POST['username'] : 'error';
     $fullname = isset($_POST['fullname']) ? $_POST['fullname'] : 'error';
     $email = isset($_POST['email']) ? $_POST['email'] : 'error';
     $password = isset($_POST['password']) ? $_POST['password'] : 'error';
     
+
     $user = new User($username, $fullname, $email, $password);
     addUser($user);
-    
+    header("location: http://localhost/pakage-store/sources/View/");
 }
 
 if(isset($_POST['register'])) 

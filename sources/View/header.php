@@ -1,6 +1,7 @@
 <?php 
     session_start();
     include_once '../Controller/UserController.php';
+    $_SESSION['cart'] = [];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -147,7 +148,7 @@
                 <i class="fas fa-list"></i>
             </button> -->
             <section class="logo">
-                <a href="./index.php">
+                <a href="./">
                     <!-- <img src="src/img/logo.png" alt="" class="logo-img"> -->
                     <span class="logo-name">Pakage Store</span>
                 </a>
@@ -213,7 +214,23 @@
                     <article class="cart-tab">
                         <div id="on-stock">
                             <ul class="cart-items">
-                                <li class="cart-item">
+                                <?php 
+                                    if(isset($cart)) {
+                                        for($i = 0; $i < 5; $i++) {
+                                            echo "
+                                            <li class='cart-item'>
+                                                <span class='cart-item-name'>{$cart[$i]}</span>
+                                                <span class='cart-item-quantity'>Số lượng: {$cart}</span>
+                                                <span class='cart-total-price'>1,000,000,000 VNĐ</span>
+                                                <a class='btn cart-item-remove' onclick='deleteItem(this)'>X</a>
+                                            </li>
+                                            ";
+
+                                        }
+                                    }
+                                
+                                ?>
+                                <!-- <li class="cart-item">
                                     <span class="cart-item-name">product item 12345</span>
                                     <span class="cart-item-quantity">Số lượng: +99</span>
                                     <span class="cart-total-price">1,000,000,000 VNĐ</span>
@@ -224,7 +241,7 @@
                                     <span class="cart-item-quantity">Số lượng: +99</span>
                                     <span class="cart-total-price">1,000,000,000 VNĐ</span>
                                     <a class="btn cart-item-remove" onclick="deleteItem(this)">X</a>
-                                </li>
+                                </li> -->
                             </ul>
                             <div class="cart-details">
                                 <a href="#">Xem thêm</a>
