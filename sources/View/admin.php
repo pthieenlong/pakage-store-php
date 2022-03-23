@@ -398,7 +398,7 @@
                                                     <img src='./img/the-witcher-3.jpeg' alt=''>
                                                 </div>
                                                 <div class='product-detail'>
-                                                    <form action='admin.php' method='post' class='product-form'>
+                                                    <form action='../Controller/AdminController.php' method='post' class='product-form'>
                                                         <div class='input-box'>
                                                             <input type='text' placeholder='Tên' value='{$products[$i]->getName()}' disabled>
                                                         </div>
@@ -475,7 +475,7 @@
                                             <img src='./img/undraw_profile.svg' alt=''>
                                         </div>
                                         <div class='product-detail'>
-                                            <form action='admin.php' method='post' class='product-form'>
+                                            <form action='../Controller/AdminController.php' method='post' class='product-form'>
                                                 <div class='input-box'>
                                                     <input type='text' placeholder='Tên'
                                                     value='{$users[$i]->getUsername()}' disabled name='username'>
@@ -491,13 +491,13 @@
                                                     <input type='text' placeholder='Số điện thoại' value='{$users[$i]->getPhone()}' name='user-phone' disabled>
                                                 </div>
                                                 <div class='input-box'>
-                                                    <button class='btn btn-success btn-icon-split' name='edit'>
+                                                    <button class='btn btn-success btn-icon-split' name='user-edit'>
                                                         <span class='icon text-white-50'>
                                                             <i class='fas fa-check'></i>
                                                         </span>
                                                         <span class='text'>Edit</span>
                                                     </button>
-                                                    <button href='#' class='btn btn-danger btn-icon-split' name='remove' style='margin-left: .5em;'>
+                                                    <button href='#' class='btn btn-danger btn-icon-split' name='user-remove' style='margin-left: .5em;'>
                                                         <span class='icon text-white-50'>
                                                             <i class='fas fa-trash'></i>
                                                         </span>
@@ -527,7 +527,7 @@
                   
                         <!-- Modal body -->
                         <div class="modal-body">
-                            <form action="admin.php" method="post" class="product-form">
+                            <form action='../Controller/AdminController.php' method="post" class="product-form">
                                 <div class="input-box">
                                     <input type="text" placeholder="Tên" name="name">
                                 </div>
@@ -575,7 +575,7 @@
                   
                         <!-- Modal body -->
                         <div class="modal-body">
-                            <form action="admin.php" method="post" class="product-form">
+                            <form action='../Controller/AdminController.php' method="post" class="product-form">
                                 <div class="input-box">
                                     <input type="text" placeholder="Tên tài khoản" name="username">
                                 </div>

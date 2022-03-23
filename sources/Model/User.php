@@ -9,28 +9,14 @@ class User {
     private $email;
     private $phone;
     private $password;
-
-    public function __construct()
-    {
-        $a = func_get_args();
-        $i = func_num_args();
-        if (method_exists($this, $f='__construct'.$i)) {
-            call_user_func_array(array($this, $f), $a);
-        }
-    }
-    public function __construct1($username, $fullname, $email, $password) {
+   
+    public function __construct($username, $fullname, $email, $password) {
         $this->username = $username;
         $this->fullname = $fullname;
         $this->email = $email;
         $this->password = $password;
     }
-    public function __construct2($id, $username, $fullname, $email)
-    {
-        $this->id = $id;
-        $this->username = $username;
-        $this->fullname = $fullname;
-        $this->email = $email;
-    }
+    
     // public function __construct($id, $username, $fullname, $email, $password, $role_id)
     // {
     //     $this->id = $id;
@@ -100,9 +86,6 @@ function getAllUsers() {
         if($user->num_rows > 0) {
             while($res = $user->fetch_assoc()) {
                 $result = new User($res['username'], $res['fullname'], $res['email'], $res['password']);
-                $result->setUsername($res['username']);
-                $result->setFullName($res['fullname']);
-                $result->setEmail($res['email']);
                 $result->setPhone($res['phone']);
                 $result->setID($res['id']);
     
