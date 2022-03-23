@@ -399,32 +399,33 @@
                                                 </div>
                                                 <div class='product-detail'>
                                                     <form action='../Controller/AdminController.php' method='post' class='product-form'>
+                                                        <!-- <input type='hidden' name='product-id' value='{$products[$i]->getID()}'/> -->
                                                         <div class='input-box'>
-                                                            <input type='text' placeholder='Tên' value='{$products[$i]->getName()}' disabled>
+                                                            <input type='text' placeholder='Tên' value='{$products[$i]->getName()}' disabled name='product-name'>
                                                         </div>
                                                         <div class='input-box'>
-                                                            <input type='text' placeholder='Giá tiền' value='{$products[$i]->getPrice()}' disabled>
+                                                            <input type='text' placeholder='Giá tiền' value='{$products[$i]->getPrice()}' disabled name='product-price'>
                                                         </div>
                                                         <div class='input-box'>
                                                             <input type='text' placeholder='Sale'
-                                                            value='{$products[$i]->getSale()}' disabled>
+                                                            value='{$products[$i]->getSale()}' disabled name='product-sale'>
                                                         </div>
                                                         <div class='input-box'>
-                                                            <input type='file' name='image-file' id='image-file'>
+                                                            <input type='file' name='product-image' id='product-image'>
                                                         </div>
                                                         <div class='input-box'>
-                                                            <select name='category' id='category' disabled>
+                                                            <select name='product-category' id='category' disabled>
                                                                 <option value='-1'>Thể loại</option>
                                                             </select>
                                                         </div>
                                                         <div class='input-box'>
-                                                            <button class='btn btn-success btn-icon-split' name='product-edit'>
+                                                            <button class='btn btn-success btn-icon-split' name='method' value='product-edit'>
                                                                 <span class='icon text-white-50'>
                                                                     <i class='fas fa-check'></i>
                                                                 </span>
                                                                 <span class='text'>Edit</span>
                                                             </button>
-                                                            <button href='#' class='btn btn-danger btn-icon-split' name='product-remove' style='margin-left: .5em;'>
+                                                            <button class='btn btn-danger btn-icon-split' name='method' value='product-remove' style='margin-left: .5em;'>
                                                                 <span class='icon text-white-50'>
                                                                     <i class='fas fa-trash'></i>
                                                                 </span>
@@ -476,6 +477,7 @@
                                         </div>
                                         <div class='product-detail'>
                                             <form action='../Controller/AdminController.php' method='post' class='product-form'>
+                                                <input type='hidden' value='{$users[$i]->getID()}' name='user-id'/>
                                                 <div class='input-box'>
                                                     <input type='text' placeholder='Tên'
                                                     value='{$users[$i]->getUsername()}' disabled name='username'>
@@ -491,13 +493,13 @@
                                                     <input type='text' placeholder='Số điện thoại' value='{$users[$i]->getPhone()}' name='user-phone' disabled>
                                                 </div>
                                                 <div class='input-box'>
-                                                    <button class='btn btn-success btn-icon-split' name='user-edit'>
+                                                    <button class='btn btn-success btn-icon-split' name='method' value='user-edit'>
                                                         <span class='icon text-white-50'>
                                                             <i class='fas fa-check'></i>
                                                         </span>
                                                         <span class='text'>Edit</span>
                                                     </button>
-                                                    <button href='#' class='btn btn-danger btn-icon-split' name='user-remove' style='margin-left: .5em;'>
+                                                    <button href='#' class='btn btn-danger btn-icon-split' name='method' value='user-remove' style='margin-left: .5em;'>
                                                         <span class='icon text-white-50'>
                                                             <i class='fas fa-trash'></i>
                                                         </span>
@@ -529,21 +531,21 @@
                         <div class="modal-body">
                             <form action='../Controller/AdminController.php' method="post" class="product-form">
                                 <div class="input-box">
-                                    <input type="text" placeholder="Tên" name="name">
+                                    <input type="text" placeholder="Tên" name="product-name">
                                 </div>
                                 <div class="input-box">
-                                    <input type="text" placeholder="Giá tiền">
+                                    <input type="text" placeholder="Giá tiền" name="product-price">
                                 </div>
                                 <div class="input-box">
-                                    <input type="text" placeholder="Sale">
+                                    <input type="text" placeholder="Sale" name="product-sale">
                                 </div>
                                 <div class="input-box">
-                                    <select name="category" id="category">
+                                    <select name="product-category" id="category">
                                         <option value="-1">Thể loại</option>
                                     </select>
                                 </div>
                                 <div class="input-box">
-                                    <button class="btn btn-success btn-icon-split" name="product-add">
+                                    <button class="btn btn-success btn-icon-split" name="method" value="product-add">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-check"></i>
                                         </span>
@@ -583,7 +585,7 @@
                                     <input type="text" placeholder="Mật khẩu" name="user-password">
                                 </div>
                                 <div class="input-box">
-                                    <button class="btn btn-success btn-icon-split" name="user-add">
+                                    <button class="btn btn-success btn-icon-split" name="method" value="user-add">
                                         <span class="icon text-white-50">
                                             <i class="fas fa-check"></i>
                                         </span>

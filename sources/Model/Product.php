@@ -109,7 +109,16 @@ class Product
         return $this->getPrice() - $this->getSalePrice();
     }
 }
+function addProduct($product) {
+    $db_connection = null;
+    $db_connection = ConnectDB($db_connection);
 
+    $query = $db_connection->prepare("INSERT INTO Product VALUES (null, ?, ?, ?, ?, 1, 50)");
+
+    $query->bind_param("ssss", $product->getName(), $product->getPrice(), $product->getSale(), $product->getCateID());
+
+    $query->execute();
+}
 function getProductByID($id)
 {
     $db_connection = null;
@@ -206,4 +215,7 @@ function getNumbersOfProductOnSale($numbers)
     }
 
     return $products;
+}
+function deleteProductByID($id) {
+    
 }
