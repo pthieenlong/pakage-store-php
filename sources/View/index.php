@@ -106,10 +106,10 @@ include_once('../Model/Product.php');
                                         </div>
                                     </a>
                                     <div class='product-buy-opt'>
-                                        <button class='btn buy'>buy now
+                                        <a class='btn buy'>buy now
                                             <i class='fas fa-cart-arrow-down'></i>
-                                        </button>
-                                        <button class='btn add-to-card'>add to cart <i class='fas fa-cart-plus'></i></button>
+                                        </a>
+                                        <a href='../Controller/CartController.php?id={$product->getID()}&quantity=1&method=add' class='btn add-to-card'>add to cart <i class='fas fa-cart-plus'></i></a>
                                     </div>
                                 </article>
                             </div>
@@ -141,10 +141,10 @@ include_once('../Model/Product.php');
                                         </div>
                                     </a>
                                     <div class='product-buy-opt'>
-                                        <button class='btn buy'>buy now
+                                        <a class='btn buy'>buy now
                                             <i class='fas fa-cart-arrow-down'></i>
-                                        </button>
-                                        <button class='btn add-to-card'>add to cart <i class='fas fa-cart-plus'></i></button>
+                                        </a>
+                                        <a href='../Controller/CartController.php?id={$product->getID()}&quantity=1&method=add' class='btn add-to-card'>add to cart <i class='fas fa-cart-plus'></i></a>
                                     </div>
                                 </article>
                             </div>
@@ -156,5 +156,5 @@ include_once('../Model/Product.php');
     </section>
 </section>
 <?php
-include_once('./footer.php');
+    include_once('footer.php');
 ?>

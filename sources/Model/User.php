@@ -10,11 +10,26 @@ class User {
     private $phone;
     private $password;
 
-    public function __construct($username, $fullname, $email, $password) {
+    public function __construct()
+    {
+        $a = func_get_args();
+        $i = func_num_args();
+        if (method_exists($this, $f='__construct'.$i)) {
+            call_user_func_array(array($this, $f), $a);
+        }
+    }
+    public function __construct1($username, $fullname, $email, $password) {
         $this->username = $username;
         $this->fullname = $fullname;
         $this->email = $email;
         $this->password = $password;
+    }
+    public function __construct2($id, $username, $fullname, $email)
+    {
+        $this->id = $id;
+        $this->username = $username;
+        $this->fullname = $fullname;
+        $this->email = $email;
     }
     // public function __construct($id, $username, $fullname, $email, $password, $role_id)
     // {
@@ -37,6 +52,9 @@ class User {
     }
     function getRoleID() {
         return $this->role_id;
+    }
+    function setUsername($username) {
+        $this->username = $username;
     }
     function getUsername() {
         return $this->username;
@@ -72,11 +90,27 @@ class User {
 
 }
 
-function getAllUser() {
+function getAllUsers() {
     $db_connection = null;
     $db_connection = ConnectDB($db_connection);
-    $query = "SELECT * FROM User";
-    $users = $db_connection->query($query)->fetch_assoc();
+    $query = $db_connection->prepare("SELECT * FROM User");
+    $users = [];
+    if($query->execute()) {
+        $user = $query->get_result();
+        if($user->num_rows > 0) {
+            while($res = $user->fetch_assoc()) {
+                $result = new User($res['username'], $res['fullname'], $res['email'], $res['password']);
+                $result->setUsername($res['username']);
+                $result->setFullName($res['fullname']);
+                $result->setEmail($res['email']);
+                $result->setPhone($res['phone']);
+                $result->setID($res['id']);
+    
+                $users[] = $result;
+            }
+        } 
+    }
+
     return $users;
 }
 

@@ -1,0 +1,36 @@
+.card {
+    width: 49%;
+}
+.row {
+    justify-content: space-between;
+}
+.input-box {
+    display: flex;
+    /* width: 50%; */
+    justify-content: space-between ;
+}
+.input-box input, .input-box select {
+    width: 100% ;
+    margin: .5em 0;
+}
+.card-body {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.product-thumbnail {
+    width: 45%;
+}
+.product-thumbnail img {
+    width: 100%;
+}
+.product-detail {
+    width: 50%;
+}
+/* .product-detail */
+.collapse-item {
+    border: none;
+    background: transparent;
+    width: 70%;
+    text-align: left;
+}

@@ -1,7 +1,8 @@
 <?php 
     session_start();
+    
     include_once '../Controller/UserController.php';
-    $_SESSION['cart'] = [];
+    include_once '../Controller/CartController.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -174,7 +175,7 @@
                                         </li>";
                                 if($user->getRoleID() == 0) 
                                     echo "<li class='method'>
-                                            <a class='btn'>Thông tin website</a>
+                                            <a href='admin.php' class='btn'>Thông tin website</a>
                                           </li>";
                                 echo "<li class='method'>
                                             <form method='POST'action='../Controller/LoginController.php'>
@@ -209,47 +210,45 @@
                     <a>
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-inner-txt">Giỏ hàng</span>
-                        <span class="cart-quantity">0</span>
+                        <span class="cart-quantity">
+                            <?php 
+                                $length = isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0;
+                                echo $length;
+                            ?>
+                        </span>
                     </a>
                     <article class="cart-tab">
                         <div id="on-stock">
                             <ul class="cart-items">
-                                <?php 
-                                    if(isset($cart)) {
-                                        for($i = 0; $i < 5; $i++) {
-                                            echo "
-                                            <li class='cart-item'>
-                                                <span class='cart-item-name'>{$cart[$i]}</span>
-                                                <span class='cart-item-quantity'>Số lượng: {$cart}</span>
-                                                <span class='cart-total-price'>1,000,000,000 VNĐ</span>
-                                                <a class='btn cart-item-remove' onclick='deleteItem(this)'>X</a>
-                                            </li>
-                                            ";
-
+                                <?php
+                                    $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
+                                    if (count($_SESSION['cart']) > 0) {
+                                        for($i = 0; $i < count($_SESSION['cart']); $i++) {
+                                                echo 
+                                                "<li class='cart-item'>
+                                                    <span class='cart-item-name'>{$_SESSION['cart'][$i]['name']}</span>
+                                                    <span class='cart-item-quantity'>Số lượng: {$_SESSION['cart'][$i]['quantity']}</span>
+                                                    <span class='cart-total-price'>{$_SESSION['cart'][$i]['price']}VNĐ</span>
+                                                    <a href='../Controller/CartController.php?index={$i}&method=delete' class='btn cart-item-remove'>X</a>
+                                                </li>";
                                         }
-                                    }
-                                
+                                    } else echo "Đơn hàng trống";
                                 ?>
-                                <!-- <li class="cart-item">
-                                    <span class="cart-item-name">product item 12345</span>
-                                    <span class="cart-item-quantity">Số lượng: +99</span>
-                                    <span class="cart-total-price">1,000,000,000 VNĐ</span>
-                                    <a class="btn cart-item-remove" onclick="deleteItem(this)">X</a>
-                                </li>
-                                <li class="cart-item">
-                                    <span class="cart-item-name">product item 12345</span>
-                                    <span class="cart-item-quantity">Số lượng: +99</span>
-                                    <span class="cart-total-price">1,000,000,000 VNĐ</span>
-                                    <a class="btn cart-item-remove" onclick="deleteItem(this)">X</a>
-                                </li> -->
-                            </ul>
+                            </ul>   
                             <div class="cart-details">
                                 <a href="#">Xem thêm</a>
                             </div>
                             <table class="cart-table">
                                 <tr>
                                     <td class="table-left"><strong>Thành tiền</strong></td>
-                                    <td class="table-right">99999999 VNĐ</td>
+                                    <td class="table-right"><?php 
+                                        $totalPrice = 0;
+                                        for($i = 0; $i < count($_SESSION['cart']); $i++) {
+                                            $totalPrice += $_SESSION['cart'][$i]['price'];
+                                        }
+
+                                        echo $totalPrice." VNĐ";
+                                    ?></td>
                                 </tr>
                                 <tr>
                                     <td class="table-left"><strong>Tổng đơn hàng</strong></td>

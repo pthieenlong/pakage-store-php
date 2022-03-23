@@ -121,3 +121,12 @@ function showSlide(n) {
         display: 'inline',
     });
 }
+function enableEditor(object) {
+    const parent = $(object).closest('.card');
+    const inputs = parent.find('.input-box > input');
+
+    for (let i = 0; i < inputs.length; i++) {
+        const element = inputs[i];
+        $(element).removeAttr('disabled');
+    }
+}
