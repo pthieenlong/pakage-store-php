@@ -1,7 +1,5 @@
 <?php
 include './header.php';
-include '../Model/Product.php';
-
 $product = getProductByID($_GET['id']);
 ?>
 <div class="container">
@@ -15,9 +13,10 @@ $product = getProductByID($_GET['id']);
                                 <i class="fas fa-chevron-left fa-3x"></i>
                             </button>
                             <!-- <div class="slider"> -->
-                            <img src="./src/img/the-witcher-3.jpeg" alt="advertise image" class="adver-img fade">
-                            <img src="./src/img/cyperpunk.jpeg" alt="advertise image" class="adver-img fade">
-                            <img src="./src/img/gta-v.jpeg" alt="advertise image" class="adver-img fade">
+                                
+                            <img src="<?php 
+                                    echo $product->getImg() == null ? './img/product-img/default-img.jpeg' : $product->getImg();
+                                ?>" alt="advertise image" class="adver-img fade">
                             <!-- </div> -->
                             <button class="banner-btn banner-btn-right" onclick="pushSlides(1)">
                                 <i class="fas fa-chevron-right fa-3x"></i>

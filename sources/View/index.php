@@ -94,11 +94,12 @@ include_once('../Model/Product.php');
                 $products = getNumbersOfProductOnSale(8);
 
                 foreach ($products as $product) {
+                    $productIMG = $product->getImg() == null ? './img/product-img/default-img.jpeg' : $product->getImg();
                     echo "
                             <div class='col-25'>
                                 <article class='product'>
                                     <a href='product.php?id={$product->getID()}'>
-                                        <img src='./img/product-img/banner-img.jpeg' alt='Product image' class='product-img'>
+                                        <img src={$productIMG} alt='Product image' class='product-img'>
                                         <div class='product-body'>
                                             <p class='product-name'>{$product->getName()}</p>
                                             <p class='product-sale-price'>" . ($product->getSale() == 0 ? $product->getPrice() : $product->getTotalPrice()) . " VNĐ" . "</p>
@@ -129,11 +130,13 @@ include_once('../Model/Product.php');
                 $products = getNumbersOfProduct(8);
 
                 foreach ($products as $product) {
+                    $productIMG = $product->getImg() == null ? './img/product-img/default-img.jpeg' : $product->getImg();
+
                     echo "
                             <div class='col-25'>
                                 <article class='product'>
                                     <a href='product.php?id={$product->getID()}'>
-                                        <img src='./img/product-img/banner-img.jpeg' alt='Product image' class='product-img'>
+                                        <img src={$productIMG} alt='Product image' class='product-img'>
                                         <div class='product-body'>
                                             <p class='product-name'>{$product->getName()}</p>
                                             <p class='product-sale-price'>" . ($product->getSale() == 0 ? $product->getPrice() : $product->getTotalPrice()) . " VNĐ" . "</p>
