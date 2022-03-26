@@ -10,6 +10,7 @@ class Product
     private $cateID;
     private $producerID;
     private $quantity;
+    private $img;
 
     public function __construct()
     {
@@ -93,7 +94,12 @@ class Product
     {
         return $this->producerID;
     }
-
+    public function setImg($img) {
+        $this->img = $img;
+    }
+    public function getImg() {
+        return $this->img;
+    }
     public function __toString()
     {
         return $this->getName() . ', ' . $this->getPrice() . ', ' . $this->getSale() . ', ' . $this->getQuantity();
@@ -113,11 +119,26 @@ function addProduct($product) {
     $db_connection = null;
     $db_connection = ConnectDB($db_connection);
 
-    $query = $db_connection->prepare("INSERT INTO Product VALUES (null, ?, ?, ?, ?, 1, 50)");
+    $query = $db_connection->prepare("INSERT INTO Product VALUES (null, ?, ?, ?, ?, 1, 50, null)");
 
     $query->bind_param("ssss", $product->getName(), $product->getPrice(), $product->getSale(), $product->getCateID());
 
-    $query->execute();
+    if($query->execute() === true) {
+        header("location: http://localhost/pakage-store/sources/View/admin.php");
+    } else header("location: http://localhost/pakage-store/sources/View/404.php");
+}
+function updateProductByID($productID, $name, $price, $sale, $img = null,  $cate = 1, $producer = 1, $quantity = 50) {
+    $db_connection = null;
+    $db_connection = ConnectDB($db_connection);
+
+    $query = $db_connection->prepare('UPDATE `Product` SET `name`= ?, `price`= ? ,`sale_percent`= ?,`cate_id`= ?,`producer_id`= ?,`quantity`= ?,`IMG`= ? WHERE `id` = ?');
+
+    $query->bind_param("ssssssss", $name, $price, $sale, $cate,
+    $producer, $quantity, $img, $productID);
+
+    if($query->execute() === true) {
+        header("location: http://localhost/pakage-store/sources/View/admin.php");
+    } else header("location: http://localhost/pakage-store/sources/View/404.php");
 }
 function getProductByID($id)
 {
@@ -137,6 +158,7 @@ function getProductByID($id)
             $product->setQuantity($res['quantity']);
             $product->setCateID($res['cate_id']);
             $product->setProducerID($res['producer_id']);
+            $product->setImg($res['IMG']);
             // $product = new Product($res['id'], $res['name'], $res['price'], $res['sale_percent'], $res['quantity'], $res['cate_id'], $res['producer_id']);
             return $product;
         } else return null;
@@ -160,6 +182,7 @@ function getAllProduct()
                 $product->setQuantity($row['quantity']);
                 $product->setCateID($row['cate_id']);
                 $product->setProducerID($row['producer_id']);
+                $product->setImg($row['IMG']);
                 $products[] = $product;
             }
         }
@@ -185,6 +208,7 @@ function getNumbersOfProduct($numbers)
                 $product->setQuantity($row['quantity']);
                 $product->setCateID($row['cate_id']);
                 $product->setProducerID($row['producer_id']);
+                $product->setImg($row['IMG']);
                 $products[] = $product;
             }
         }
@@ -209,6 +233,7 @@ function getNumbersOfProductOnSale($numbers)
                 $product->setQuantity($row['quantity']);
                 $product->setCateID($row['cate_id']);
                 $product->setProducerID($row['producer_id']);
+                $product->setImg($row['IMG']);
                 $products[] = $product;
             }
         }
@@ -216,6 +241,19 @@ function getNumbersOfProductOnSale($numbers)
 
     return $products;
 }
-function deleteProductByID($id) {
-    
+function removeProductByID($id) {
+    $db_connection = null;
+    $db_connection = ConnectDB($db_connection);
+    $sql = "DELETE FROM Product WHERE id = $id";
+    if($db_connection->query($sql) === true) {
+        header("location: http://localhost/pakage-store/sources/View/admin.php");
+    } else header("location: http://localhost/pakage-store/sources/View/404.php");
+}
+
+function uploadFile() {
+    $targetFolder = '../View/img/product-img/';
+    $filePath = $targetFolder.$_FILES['product-image']['name'];
+    if(move_uploaded_file($_FILES['product-image']['tmp_name'], $filePath)) {
+        return $filePath;
+    } else return 'null';
 }

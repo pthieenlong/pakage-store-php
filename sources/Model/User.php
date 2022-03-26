@@ -151,3 +151,12 @@ function isPasswordCorrected($username, $password) {
         return true;
     } else return false;
 }
+function removeUserByID($id) {
+    $db_connection = null;
+    $db_connection = ConnectDB($db_connection);
+    $sql = "DELETE FROM User WHERE id = $id";
+    if($db_connection->query($sql) === true) {
+        header("location: http://localhost/pakage-store/sources/View/admin.php");
+    } else header("location: http://localhost/pakage-store/sources/View/404.php");
+
+}

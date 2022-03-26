@@ -1,6 +1,14 @@
 <?php 
     include '../Model/Product.php';
     include '../Model/User.php';
+    // if(isset($_SESSION['username']) && $_SESSION['success-login'] === 'success') {
+    //     $user = getUserByUsername($_SESSION['username']);
+    //     if($user->getRoleID() != 0) {
+    //         echo "<script>alert('Vui lòng đăng nhập bằng tài khoản admin'); window.location.href='http://localhost/pakage-store/sources/View/';</script>";
+    //     }
+    // } else {
+    //     echo "<script>alert('Vui lòng đăng nhập bằng tài khoản admin'); window.location.href='http://localhost/pakage-store/sources/View/';</script>";
+    // }
 ?>
 
 <!DOCTYPE html>
@@ -372,6 +380,7 @@
                             <?php 
                                 $products = getAllProduct();
                                 for($i = 0; $i < count($products); $i++) {
+                                    $productIMG = $products[$i]->getImg() == null ? '../View/img/the-witcher-3.jpeg' : $products[$i]->getImg();
                                     echo "
                                             <div class='card shadow mb-4'>
                                             <!-- Card Header - Dropdown -->
@@ -395,23 +404,25 @@
                                             <!-- Card Body -->
                                             <div class='card-body'>
                                                 <div class='product-thumbnail'>
-                                                    <img src='./img/the-witcher-3.jpeg' alt=''>
+                                                    <img src=".$productIMG." alt=''>
                                                 </div>
                                                 <div class='product-detail'>
-                                                    <form action='../Controller/AdminController.php' method='post' class='product-form'>
-                                                        <!-- <input type='hidden' name='product-id' value='{$products[$i]->getID()}'/> -->
+                                                    <form action='../Controller/AdminController.php' method='post' class='product-form' enctype='multipart/form-data'>
                                                         <div class='input-box'>
-                                                            <input type='text' placeholder='Tên' value='{$products[$i]->getName()}' disabled name='product-name'>
+                                                            <input type='hidden' name='product-id' id='product-id' value='{$products[$i]->getID()}' disabled/>
                                                         </div>
                                                         <div class='input-box'>
-                                                            <input type='text' placeholder='Giá tiền' value='{$products[$i]->getPrice()}' disabled name='product-price'>
+                                                            <input type='text' name='product-name' placeholder='Tên' value='{$products[$i]->getName()}' disabled >
                                                         </div>
                                                         <div class='input-box'>
-                                                            <input type='text' placeholder='Sale'
-                                                            value='{$products[$i]->getSale()}' disabled name='product-sale'>
+                                                            <input type='text' name='product-price' placeholder='Giá tiền' value='{$products[$i]->getPrice()}' disabled >
                                                         </div>
                                                         <div class='input-box'>
-                                                            <input type='file' name='product-image' id='product-image'>
+                                                            <input type='text' placeholder='Sale' name='product-sale'
+                                                            value='{$products[$i]->getSale()}' disabled >
+                                                        </div>
+                                                        <div class='input-box'>
+                                                            <input type='file' name='product-image' id='product-image' disabled>
                                                         </div>
                                                         <div class='input-box'>
                                                             <select name='product-category' id='category' disabled>

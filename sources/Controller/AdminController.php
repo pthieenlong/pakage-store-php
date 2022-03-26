@@ -1,25 +1,25 @@
 <?php
-include '../Model/User.php';
-include '../Model/Product.php';
+include_once '../Model/User.php';
+include_once '../Model/Product.php';
 
-$method = isset($_POST['method']) ? $_POST['method'] : null;
+
+$method = isset($_REQUEST['method']) ? $_REQUEST['method'] : null;
 
 // product section
-$productID = isset($_POST['product-id']) ? $_POST['product-id'] : null;
-$productName = isset($_POST['product-name']) ? $_POST['product-name'] : null;
-$productPrice = isset($_POST['product-price']) ? $_POST['product-price'] : null;
-$productSale = isset($_POST['product-sale']) ? $_POST['product-sale'] : null;
-$productImage = isset($_POST['product-image']) ? $_POST['product-image'] : null; 
-$productCate = isset($_POST['product-category']) ? $_POST['product-category'] : null;
+$productID = isset($_REQUEST['product-id']) ? $_REQUEST['product-id'] : 'null';
+$productName = isset($_REQUEST['product-name']) ? $_REQUEST['product-name'] : 'null';
+$productPrice = isset($_REQUEST['product-price']) ? $_REQUEST['product-price'] : 'null';
+$productSale = isset($_REQUEST['product-sale']) ? $_REQUEST['product-sale'] : 'null';
+$productCate = isset($_REQUEST['product-category']) ? $_REQUEST['product-category'] : 'null';
+
 
 
 // user section
-$userID = isset($_POST['user-id']) ? $_POST['user-id'] : null;
-$username = isset($_POST['username']) ? $_POST['username'] : null;
-$userFullname = isset($_POST['user-fullname']) ? $_POST['user-fullname'] : null;
-$userMail = isset($_POST['user-mail']) ? $_POST['user-mail'] : null;
-$userPhone = isset($_POST['user-phone']) ? $_POST['user-phone'] : null;
-
+$userID = isset($_REQUEST['user-id']) ? $_REQUEST['user-id'] : null;
+$username = isset($_REQUEST['username']) ? $_REQUEST['username'] : null;
+$userFullname = isset($_REQUEST['user-fullname']) ? $_REQUEST['user-fullname'] : null;
+$userMail = isset($_REQUEST['user-mail']) ? $_REQUEST['user-mail'] : null;
+$userPhone = isset($_REQUEST['user-phone']) ? $_REQUEST['user-phone'] : null;
 
 
 switch ($method) {
@@ -28,22 +28,26 @@ switch ($method) {
             addUser($user);
         break;
     case 'user-edit':
+        echo $userID;
         // edit user
         break;
     case 'user-remove':
+        removeUserByID($userID);
         // remove user
         break;
     case 'product-add':
+        echo $productName.' - '.$productPrice;
         $product = new Product($productName, $productPrice);
         $product->setSale($productSale > 1 ? 0 : $productSale);
         $product->setCateID($productCate == -1 ? 1 : $productCate);
         addProduct($product);
+        
         break;
     case 'product-edit':
-        // edit product
+        updateProductByID($productID, $productName, $productPrice, $productSale, uploadFile());
         break;
     case 'product-remove':
-        // remove product
+        removeProductByID($productID);  
         break;
     default:
         # code...
