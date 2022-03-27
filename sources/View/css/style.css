@@ -37,7 +37,21 @@ header {
     width: 12.5em;
     font-size: 1.25em;
 }
-
+.header .search-form form {
+    border: var(--lightblue-color) 1px solid;
+    width: 20em;
+    display: flex;
+}
+.search-form > form > input[type="text"] {
+    width: 100%;
+    border: none;
+    padding: .5em;
+}
+.header .search-form form button {
+    padding: .5em;
+    background-color: var(--lightblue-color);
+    color: var(--black-color);
+}
 .header .user {
     font-size: 1em;
     display: flex;
@@ -511,7 +525,7 @@ footer {
     flex-wrap: wrap;
     /* width: 50%; */
 }
-.product-buy-opt > a {
+.product-buy-opt > a, .product-buy-opt > button {
     background-color: var(--darkblue-color);
     padding: .5em 1em;
     width: calc(100% - 5em);
@@ -525,10 +539,10 @@ footer {
     transition: color 200ms;
     transition: background-color 200ms;
 }
-.product-buy-opt > a:first-child {
+.product-buy-opt > a:first-child, .product-buy-opt > button:first-child {
     margin: 5% auto;
 }
-.product-buy-opt > a:hover {
+.product-buy-opt > a:hover, .product-buy-opt > button:hover {
     background-color: var(--lightblue-color);
     border-color: var(--darkblue-color);
 }

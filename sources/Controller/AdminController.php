@@ -36,15 +36,20 @@ switch ($method) {
         // remove user
         break;
     case 'product-add':
-        echo $productName.' - '.$productPrice;
         $product = new Product($productName, $productPrice);
-        $product->setSale($productSale > 1 ? 0 : $productSale);
-        $product->setCateID($productCate == -1 ? 1 : $productCate);
+        // Product cate & sale dang null ?
+        $product->setSale(0);
+        $product->setCateID(1);
+
+        // echo $product;
         addProduct($product);
         
         break;
     case 'product-edit':
-        updateProductByID($productID, $productName, $productPrice, $productSale, uploadFile());
+        // == null thi ko ad zo nha;
+        if(isset($_FILES['product-image']))
+            updateProductByID($productID, $productName, $productPrice, $productSale, uploadFile());
+        else updateProductByID($productID, $productName, $productPrice, $productSale);
         break;
     case 'product-remove':
         removeProductByID($productID);  

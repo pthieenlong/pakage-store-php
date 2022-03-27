@@ -154,6 +154,12 @@
                     <span class="logo-name">Pakage Store</span>
                 </a>
             </section>
+            <section class="search-form">
+                <form action="../Controller/SearchController.php" method="get">
+                    <input type="text" name="search">
+                    <button>Search</button>
+                </form>
+            </section>
             <section class="user">
                 <article class="user-account" id="head-user">
                     <?php 

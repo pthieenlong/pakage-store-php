@@ -105,7 +105,9 @@ function addUser($user) {
 
     $query->bind_param("ssss", $user->getUsername(), $user->getPassword(), $user->getEmail(), $user->getFullName());
 
-    $query->execute();
+    if($query->execute()) {
+        header("location: http://localhost/pakage-store/sources/View/admin.php");
+    } else header("location: http://localhost/pakage-store/sources/View/404.php");
 }
 
 function getUserByUsername($username) {

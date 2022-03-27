@@ -86,12 +86,14 @@ include_once('../Model/Product.php');
         <hr>
         <section class="product-list">
             <section class="product-heading">
-                <span class="tag-name tag">Khuyến mãi</span>
-                <span class="tag-more tag">MORE</span>
+                <a href="#" class="tag-name tag">Khuyến mãi</a>
+                <a href="#" class="tag-more tag">
+                Khám phá
+                </a>
             </section>
             <section class="product-wrapper">
                 <?php
-                $products = getNumbersOfProductOnSale(8);
+                $products = getNumbersOfProductOnSale(4);
 
                 foreach ($products as $product) {
                     $productIMG = $product->getImg() == null ? './img/product-img/default-img.jpeg' : $product->getImg();
@@ -110,20 +112,23 @@ include_once('../Model/Product.php');
                                         <a class='btn buy'>buy now
                                             <i class='fas fa-cart-arrow-down'></i>
                                         </a>
-                                        <a href='../Controller/CartController.php?id={$product->getID()}&quantity=1&method=add' class='btn add-to-card'>add to cart <i class='fas fa-cart-plus'></i></a>
+                                        <button href='' class='btn add-to-card' onclick='addToCart()'>add to cart <i class='fas fa-cart-plus'></i></butt>
                                     </div>
                                 </article>
                             </div>
                         ";
                 }
+                // ../Controller/CartController.php?id={$product->getID()}&quantity=1&method=add
                 ?>
             </section>
         </section>
         <hr>
         <section class="product-list">
             <section class="product-heading">
-                <span class="tag-name tag">Mới ra mắt</span>
-                <span class="tag-more tag">MORE</span>
+                <a href="#" class="tag-name tag">Mới ra mắt</a>
+                <a href="#" class="tag-more tag">
+                    Khám phá
+                </a>
             </section>
             <section class="product-wrapper">
                 <?php

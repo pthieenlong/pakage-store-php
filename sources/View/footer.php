@@ -66,6 +66,7 @@
 <script src="./js/app.js"></script>
 <script src="./js/headToggle.js"></script>
 <script src="./js/validate.js"></script>
+<script src="./js/ajax.js"></script>
 </body>
 
 </html>

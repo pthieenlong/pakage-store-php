@@ -119,11 +119,11 @@ function addProduct($product) {
     $db_connection = null;
     $db_connection = ConnectDB($db_connection);
 
-    $query = $db_connection->prepare("INSERT INTO Product VALUES (null, ?, ?, ?, ?, 1, 50, null)");
+    $query = $db_connection->prepare("INSERT INTO Product VALUES (NULL, ?, ?, ?, ?, 1, 50, NULL)");
 
     $query->bind_param("ssss", $product->getName(), $product->getPrice(), $product->getSale(), $product->getCateID());
-
-    if($query->execute() === true) {
+    
+    if($query->execute()) {
         header("location: http://localhost/pakage-store/sources/View/admin.php");
     } else header("location: http://localhost/pakage-store/sources/View/404.php");
 }
